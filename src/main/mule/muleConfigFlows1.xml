@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="Public-Flow-A" doc:id="f733a7d2-2330-480a-b94f-924ecd47e81c" >
+		<http:listener doc:name="HTTP - GET" doc:id="8c275382-70df-415e-ad31-007c6434502e" config-ref="HTTP_Listener_config" allowedMethods="GET" path="/muleconfig1"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a345f719-1d8a-4839-a297-1da63399becf" />
+		<set-payload value='"I am the payload from Public-Flow-A"' doc:name='"I am the payload from Public-Flow-A"' doc:id="544b7caa-8c2e-4904-92a5-b66c00327320" />
+		<set-variable value="I am the variable from Public-Flow-A" doc:name="I am the variable from Public-Flow-A" doc:id="fe96ce2e-f104-4d85-99db-2dd097c1051a" variableName="variable-Pub-Flow-A"/>
+		<logger level="INFO" doc:name="Logger" doc:id="480fedbc-edf5-4604-be6b-2a78ac67be07" />
+	</flow>
+	<flow name="Public-Flow-B" doc:id="60def8f0-dcc8-4de8-8451-bdf609458162" >
+		<http:listener doc:name="HTTP- POST" doc:id="81bd1dec-c070-4662-a787-db30b68a6d5c" config-ref="HTTP_Listener_config" path="/muleconfig1"/>
+		<logger level="INFO" doc:name="Logger" doc:id="a2ddde70-de1b-4006-9116-331285febbaf" />
+		<set-payload value='"I am the payload from Public-Flow B"' doc:name='"I am the payload from Public-Flow B"' doc:id="0c08dda8-16ce-4404-a2fe-1b879aab2612" />
+		<set-variable value='"I am the variable from Public-Flow B"' doc:name='"I am the variable from Public-Flow B"' doc:id="ee7a657b-0d51-4595-94cf-134326aeffb5" variableName="variable Pub-Flow-B"/>
+		<logger level="INFO" doc:name="Logger" doc:id="888beac9-bb11-4e6a-97f0-6cd6f1b96520" />
+	</flow>
+</mule>
