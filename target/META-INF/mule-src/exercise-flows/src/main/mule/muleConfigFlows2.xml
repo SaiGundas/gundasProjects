@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="muleConfigFlows2-Public" doc:id="b15387dc-b986-45b8-a660-339000535848" >
+		<http:listener doc:name="Listener" doc:id="192b27fd-0305-4ead-a5e0-418041a536b4" config-ref="HTTP_Listener_config" path="/muleconfig2"/>
+		<logger level="INFO" doc:name="Logger" doc:id="d533ee11-3881-46e6-b6c0-d129654e0be9" />
+		<set-payload value='"I am the Payload from Public flow -2"' doc:name="I am the Payload from Public flow -2" doc:id="89b69a00-e9d4-4e2c-b1c3-fa82654c3a7f" />
+		<set-variable value='"i am the Variable from Public flow - 2"' doc:name='I am the Variable from Public flow - 2"' doc:id="9da8c71a-676c-4e31-aa32-6896bc97ffeb" variableName="Variable from Public flow - 2"/>
+		<flow-ref doc:name="Mule-Sub-Flow-2" doc:id="c5927510-690f-4fa4-97f6-6ef5aebe6c7e" name="muleConfig-Sub-Flow-2"/>
+		<logger level="INFO" doc:name="Logger" doc:id="6bd9811c-fb3c-4072-b084-ed2c2c8436a7" />
+		<flow-ref doc:name="Mule-Private-Flow-2" doc:id="eb429cd3-768f-4bc3-8903-779a515ecfe1" name="muleConfigFlows2-Private_Flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="771d9929-9e9a-4755-9bb3-cc519d50ffd7" />
+		<flow-ref doc:name="Public-Flow-A" doc:id="c6b771e3-cc5c-405b-b2d2-ff403107b51b" name="Public-Flow-A"/>
+		<logger level="INFO" doc:name="Logger" doc:id="1ab3b27a-9818-4409-bb9c-08d75e60c4f2" />
+	</flow>
+	<sub-flow name="muleConfig-Sub-Flow-2" doc:id="926b114d-1714-4797-b65e-cc2e43b651f2" >
+		<logger level="INFO" doc:name="Logger" doc:id="abf9d18f-5c6d-496f-921c-931cfd6d4d11" />
+		<set-payload value='"I am the payload from Sub-Flow-2"' doc:name="I am the payload from Sub-Flow-2" doc:id="3e8a24f0-d1a2-4f8e-a1dc-5875ef7ba7eb" />
+		<set-variable value='"I am the Varialble from Sub-Flow-2"' doc:name="I am the Varialble from Sub-Flow-2" doc:id="2207833e-5b9f-4d78-b8d0-a2109505d7b5" variableName="Varialble from Sub-Flow-2"/>
+		<ee:transform doc:name="Transform Message" doc:id="d7c6ec7a-e401-48c2-9405-b4bd036944dc" >
+			<ee:message >
+				<ee:set-attributes ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	attr : "dummy"
+}]]></ee:set-attributes>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="68f565be-6f82-433d-abbf-9d624d2be3fb" />
+	</sub-flow>
+	<flow name="muleConfigFlows2-Private_Flow" doc:id="1c68bf5f-4333-43b0-a9d1-c45fcc3a03d9" >
+		<logger level="INFO" doc:name="Logger" doc:id="62fc9ccd-48d8-4734-8156-80801dc8a32b" />
+		<set-payload value='"I am the payload from Private-Flow-2"' doc:name='"I am the payload from Private-Flow-2"' doc:id="0ac00732-c4a8-4b84-baf1-9d7318140dba" />
+		<set-variable value='"I am the Variable from Private-Flow-2"' doc:name='"I am the Variable from Private-Flow-2"' doc:id="9a0555de-f092-4525-b945-95110ab9ddc1" variableName='"I am the Variable from Private-Flow-2"'/>
+		<flow-ref doc:name="muleConfig-Sub-Flow-2" doc:id="1b143079-d479-401b-baf5-2e575ce85cf6" name="muleConfig-Sub-Flow-2"/>
+		<logger level="INFO" doc:name="Logger" doc:id="15f653b3-085e-4541-a630-61d32129062a" />
+	</flow>
+</mule>
